@@ -1,5 +1,5 @@
 # slibc
-> A small C library for learning.
+> A tiny C library for learning.
 
 #定位
 glibc的代码非常庞大而且佶屈聱牙，非常难读，定位于嵌入式linux系统的uClibc虽相对来说轻量一点，但对于初学者来说一点也不轻量。
@@ -14,26 +14,34 @@ glibc的代码非常庞大而且佶屈聱牙，非常难读，定位于嵌入式
 * 基本的字符串操作，部分，待增加；
 
 #使用
-###编译C库
+
+##直接使用gcc编译器套件
+###1 编译C库
 ```
-# gcc -c -fno-builtin -nostdlib -fno-stack-protector entry.c stdio.c string.c printf.c
+# gcc -c -fno-builtin -nostdlib -fno-stack-protector start.c stdio.c string.c printf.c
 ```
 上述命令编译各源文件，选项功能依次是：关闭GCC内置函数功能,不使用任何来自Glibc、GCC的库文件和启动文件,禁用堆栈保护。
 
 ```
-# ar -rs slibc.a printf.o stdio.o string.o
+# ar -rs tinylibc.a printf.o stdio.o string.o
 ```
 上述命令产生静态链接库。
 
-###编译你的C程序
+###2 编译你的C程序
 
 ```
 # gcc -c -ggdb -fno-builtin -nostdlib test.c
-# ld -static -e slibc_entry entry.o test.o slibc.a -o test
+# ld -static -e slibc_entry start.o test.o tinylibc.a -o test
 ```
-静态链接，指定入口函数为slibc_entry，其在entry.c中定义
+静态链接，指定入口函数为tinylibc_entry，其在start.c中定义
+
+##使用Makefile
+```
+make
+```
+将会生成tinylibc.a及可执行文件。
+
 
 #TODO
 
-* 增加Makefile；
 * 增加堆上的动态内存管理；
