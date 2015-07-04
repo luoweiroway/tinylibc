@@ -31,7 +31,7 @@ glibc的代码非常庞大而且佶屈聱牙，非常难读，定位于嵌入式
 
 ```
 # gcc -c -ggdb -fno-builtin -nostdlib test.c
-# ld -static -e slibc_entry start.o test.o tinylibc.a -o test
+# ld -static -e tinylibc_entry start.o test.o tinylibc.a -o test
 ```
 静态链接，指定入口函数为tinylibc_entry，其在start.c中定义
 
