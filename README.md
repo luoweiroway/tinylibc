@@ -14,8 +14,17 @@ glibc的代码非常庞大而且佶屈聱牙，非常难读，定位于嵌入式
 * 基本的字符串操作，部分，待增加；
 
 #使用
+两种方法使用，简洁一点就是直接用make命令生成静态库与启动文件，并编译链接C程序，如下：
+##使用Makefile
+```
+make
+```
+将会生成tinylibc.a(静态库)及start.o(启动文件)，以及最终的可执行程序文件。
 
-##直接使用gcc编译器套件
+
+由于目前项目文件非常少，所以也可以直接使用gcc编译套件进行手动编译，如下：
+
+##使用gcc编译器套件
 ###1 编译C库
 ```
 # gcc -c -fno-builtin -nostdlib -fno-stack-protector start.c stdio.c string.c printf.c
@@ -35,11 +44,7 @@ glibc的代码非常庞大而且佶屈聱牙，非常难读，定位于嵌入式
 ```
 静态链接，指定入口函数为tinylibc_entry，其在start.c中定义
 
-##使用Makefile
-```
-make
-```
-将会生成tinylibc.a及可执行文件。
+
 
 
 #TODO
